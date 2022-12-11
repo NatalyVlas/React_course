@@ -1,11 +1,11 @@
-.text_style {
+.btn_style {
     border: 1px solid #3D7363;
     border-radius: 15px;
     color: #401A04;
-    font-size: 5rem;
+    font-size: 2rem;
     font-weight: 800;
     padding: 10px;
-    margin-left: 20px;
+    margin-left: 10px;
     display: inline-block;
     font-family: source-code-pro;
     background-color: #8C543F;
