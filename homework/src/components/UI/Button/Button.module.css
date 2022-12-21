@@ -1,8 +1,8 @@
-.btn_style {
+.btn {
     border: 1px solid #3D7363;
     border-radius: 15px;
     color: #401A04;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 800;
     padding: 10px;
     margin-left: 10px;

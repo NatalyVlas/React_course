@@ -1,15 +1,15 @@
 import { useState } from 'react'
-// import { Button } from '../UI/Button/Button'
+import { Button } from '../UI/Button/Button'
 import styles from './Form.module.css'
-import ITextField from '@mui/material/TextField'
-import IButton from '@mui/material/Button'
+// import ITextField from '@mui/material/TextField'
+// import IButton from '@mui/material/Button'
 
-export function Form({ addMessage }) {
+export function Form({ AddMessage }) {
     const [value, setValue] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault() // отменяет перезагрузку странички
-        addMessage({
+        AddMessage({
             author: 'user',
             text: value
         })
@@ -19,7 +19,7 @@ export function Form({ addMessage }) {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <ITextField
+                {/* <ITextField
                     type="text"
                     value={value}
                     onChange={(event) => setValue(event.target.value)}
@@ -34,12 +34,12 @@ export function Form({ addMessage }) {
                     type="submit"
                     color="success"
                     size="normal"
-                >Send a message</IButton>
-                {/* <input type="text" value={value}
+                >Send a message</IButton> */}
+                <input type="text" value={value}
                     onChange={(event) => setValue(event.target.value)}
-                    className={styles.input_style}>
-                </input> */}
-                {/* <Button type="submit">Send a message</Button> */}
+                    className={styles.input}>
+                </input>
+                <Button type="submit">Send a message</Button>
             </form>
         </>
     )

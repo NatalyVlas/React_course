@@ -6,7 +6,9 @@ export function MessageList({ messages }) {
         <>
             <ul>
                 {messages.map((message, index) => (
-                    <li key={index}>{message.text}</li>
+                    <li key={index}>
+                        {message.author}: {message.text}
+                    </li>
                 ))}
             </ul>
         </>

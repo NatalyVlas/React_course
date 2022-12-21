@@ -1,56 +1,59 @@
-import { Message } from './components/Message/Message'
-import { Form } from './components/Form/Form'
-import { MessageList } from './components/MessageList/MessageList'
+import { Routes, Route } from 'react-router-dom'
+import { Header } from './components/Header/Header'
+import { MainPage } from './pages/MainPage'
+import { ProfilePage } from './pages/ProfilePage'
+import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList/ChatList'
-import { useState, useEffect } from 'react'
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import { useState } from 'react'
+import { nanoid } from "nanoid"
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+const defaultMessages = {
+  default: [
+    {
+      author: 'user',
+      text: 'one text'
+    },
+    {
+      author: 'user',
+      text: 'two text'
+    }
+  ]
+}
 
 export function App() {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(defaultMessages)
 
-  const addMessage = (newMessage) => {
-    setMessages([...messages, newMessage])
+  const chats = Object.keys(messages).map((chat) => ({
+    id: nanoid(),
+    name: chat
+  }))
+
+  const addChat = (newChat) => {
+    console.log(newChat)
+    setMessages({ ...messages, [newChat.name]: [] })
   }
 
-  useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].author === 'user') {
-      const timeout = setTimeout(() => {
-        addMessage({
-          author: 'bot',
-          text: 'please, write something else'
-        })
-      }, 1500)
+  const onAddMessage = (chatId, newMessage) => {
+    setMessages([...messages[chatId], newMessage])
+  }
 
-      return () => {
-        clearTimeout(timeout) // остановить бота
-      }
-    }
-  }, [messages])
-
-  return (<>
-    <Message text="This is a Chat" />
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
-        <Grid item xs={4}>
-          <ChatList />
-        </Grid>
-        <Grid item xs={8}>
-          <Form addMessage={addMessage} />
-          <MessageList messages={messages} />
-        </Grid>
-      </Grid>
-    </Box>
-  </>
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<Header />}>
+          <Route index element={<MainPage />} />
+          <Route path='profile' element={<ProfilePage />} />
+          <Route path='chats'>
+            <Route index element={<ChatList chats={chats} addChat={addChat} />} />
+            <Route path=":chatId" element={<ChatsPage
+              chats={chats}
+              messages={messages}
+              onAddMessage={onAddMessage}
+              addChat={addChat} />} />
+          </Route>
+        </Route>
+        <Route path='*' element={<h1>404 PAGE NOT FOUND</h1>} /> {/*при переходе не туда) */}
+      </Routes>
+    </>
   )
 }

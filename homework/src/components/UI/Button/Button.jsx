@@ -4,7 +4,7 @@ export function Button(props) {
 
     return (
         <>
-            <button {...props} className={styles.btn_style}>{props.children}</button>
+            <button {...props} className={styles.btn}>{props.children}</button>
         </>
     )
 }

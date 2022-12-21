@@ -1,8 +1,8 @@
-.input_style {
+.input {
     border: 1px solid #3D7363;
     border-radius: 15px;
-    color: #401A04;
-    font-size: 2rem;
+    color: #401a04;
+    font-size: 1rem;
     font-weight: 800;
     padding: 10px;
     margin-left: 20px;
