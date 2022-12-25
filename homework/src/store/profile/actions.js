@@ -1,14 +1,11 @@
 import * as types from './types'
 
-export const changeName = (name) => {
+export const changeName = (data) => {
     return {
         type: types.CHANGE_NAME,
-        payload: name
+        payload: data
     }
 }
-export const selectCheckbox = (visible) => {
-    return {
-        type: types.SELECT_CHECKBOX,
-        payload: visible
-    }
-}
+export const toggleProfile = () => ({
+    type: types.TOGGLE_PROFILE  // более коротная запись без return
+})
