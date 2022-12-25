@@ -1,18 +1,19 @@
 import { useState } from "react"
-import { nanoid } from "nanoid"
 import { Link } from "react-router-dom"
 import styles from './ChatList.module.css'
 import { Button } from "../UI/Button/Button"
+import { useDispatch, useSelector } from "react-redux"
+import { addChat, deleteChat } from "../../store/messages/actions"
+import { selectChat } from "../../store/messages/selectors"
 
-export function ChatList({ addChat, chats }) {
+export function ChatList() {
     const [value, setValue] = useState('')
+    const dispatch = useDispatch()
+    const chats = useSelector(selectChat, (prev, next) => prev.length === next.length)
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        addChat({
-            id: nanoid(),
-            name: value
-        })
+        dispatch(addChat(value))
     }
 
     return (
@@ -30,6 +31,7 @@ export function ChatList({ addChat, chats }) {
                         <Link to={`/chats/${chat.name}`}>
                             {chat.name}
                         </Link>
+                        <button onClick={() => dispatch(deleteChat(chat.name))}>&times;</button>
                     </li>
                 ))}
             </ul>

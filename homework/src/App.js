@@ -5,7 +5,6 @@ import { ProfilePage } from './pages/ProfilePage'
 import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList/ChatList'
 import { useState } from 'react'
-import { nanoid } from "nanoid"
 import { Provider } from 'react-redux'
 import { store } from './store'
 
@@ -25,22 +24,6 @@ const defaultMessages = {
 export function App() {
   const [messages, setMessages] = useState(defaultMessages)
 
-  const chats = Object.keys(messages).map((chat) => ({
-    id: nanoid(),
-    name: chat
-  }))
-
-  const addChat = (newChat) => {
-    setMessages({ ...messages, [newChat.name]: [] })
-  }
-
-  const onAddMessage = (chatId, newMessage) => {
-    setMessages({
-      ...messages,
-      [chatId]: [...messages[chatId], newMessage]
-    })
-  }
-
   return (
     <>
       <Provider store={store}>
@@ -49,12 +32,8 @@ export function App() {
             <Route index element={<MainPage />} />
             <Route path='profile' element={<ProfilePage />} />
             <Route path='chats'>
-              <Route index element={<ChatList chats={chats} addChat={addChat} />} />
-              <Route path=":chatId" element={<ChatsPage
-                chats={chats}
-                messages={messages}
-                onAddMessage={onAddMessage}
-                addChat={addChat} />} />
+              <Route index element={<ChatList />} />
+              <Route path=":chatId" element={<ChatsPage />} />
             </Route>
           </Route>
           <Route path='*' element={<h1>404 PAGE NOT FOUND</h1>} /> {/*при переходе не туда) */}

@@ -2,40 +2,32 @@ import { Message } from '../components/Message/Message'
 import { Form } from '../components/Form/Form'
 import { MessageList } from '../components/MessageList/MessageList'
 import { ChatList } from '../components/ChatList/ChatList'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import styles from "./ChatsPage.module.css"
+import { useSelector } from 'react-redux'
+import { selectMessage } from '../store/messages/selectors'
 
-export function ChatsPage({ addChat, onAddMessage, messages, chats }) {
-    // const [messages, setMessages] = useState([])
+export function ChatsPage() {
     const { chatId } = useParams()
+    const messages = useSelector(selectMessage)
 
-    // const addMessage = (newMessage) => {
-    //     setMessages([...messages, newMessage])
-    // }
+    // useEffect(() => {
+    //     if (chatId &&
+    //         messages[chatId].length > 0 &&
+    //         messages[chatId][messages[chatId].length - 1].author === 'user') {
+    //         const timeout = setTimeout(() => {
+    //             onAddMessage(chatId, {
+    //                 author: 'bot',
+    //                 text: 'please, write something else'
+    //             })
+    //         }, 1500)
 
-    useEffect(() => {
-        if (chatId &&
-            messages[chatId].length > 0 &&
-            messages[chatId][messages[chatId].length - 1].author === 'user') {
-            const timeout = setTimeout(() => {
-                onAddMessage(chatId, {
-                    author: 'bot',
-                    text: 'please, write something else'
-                })
-            }, 1500)
-
-            return () => {
-                clearTimeout(timeout) // остановить бота
-            }
-        }
-    }, [chatId, messages])
-
-    const handleAddMessage = (message) => {
-        if (chatId) {
-            onAddMessage(chatId, message)
-        }
-    }
+    //         return () => {
+    //             clearTimeout(timeout) // остановить бота
+    //         }
+    //     }
+    // }, [chatId, messages])
 
     if (chatId && !messages[chatId]) {
         return <Navigate to="/chats" replace />
@@ -45,10 +37,10 @@ export function ChatsPage({ addChat, onAddMessage, messages, chats }) {
         <Message text="This is a Chat" />
         <div className={styles.flex}>
             <div>
-                <ChatList chats={chats} addChat={addChat} />
+                <ChatList />
             </div>
             <div>
-                < Form addMessage={handleAddMessage} />
+                < Form />
                 <MessageList messages={chatId ? messages[chatId] : []} />
             </div>
 
