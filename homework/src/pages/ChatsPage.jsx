@@ -47,8 +47,11 @@ export function ChatsPage({ addChat, onAddMessage, messages, chats }) {
             <div>
                 <ChatList chats={chats} addChat={addChat} />
             </div>
-            < Form addMessage={handleAddMessage} />
-            <MessageList messages={chatId ? messages[chatId] : []} />
+            <div>
+                < Form addMessage={handleAddMessage} />
+                <MessageList messages={chatId ? messages[chatId] : []} />
+            </div>
+
         </div>
     </>
     )

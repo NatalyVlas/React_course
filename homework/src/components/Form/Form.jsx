@@ -4,12 +4,12 @@ import styles from './Form.module.css'
 // import ITextField from '@mui/material/TextField'
 // import IButton from '@mui/material/Button'
 
-export function Form({ AddMessage }) {
+export function Form({ addMessage }) {
     const [value, setValue] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault() // отменяет перезагрузку странички
-        AddMessage({
+        addMessage({
             author: 'user',
             text: value
         })
