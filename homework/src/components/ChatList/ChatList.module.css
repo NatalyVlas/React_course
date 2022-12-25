@@ -1,0 +1,16 @@
+.color {
+    background-color: #D9AA8F;
+}
+
+.input {
+    border: 1px solid #3D7363;
+    border-radius: 15px;
+    color: #401a04;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px;
+    margin-left: 20px;
+    display: inline-block;
+    font-family: source-code-pro;
+    background-color: #8C543F;
+}
