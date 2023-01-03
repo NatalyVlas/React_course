@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Button } from '../UI/Button/Button'
+import { AUTHOR } from '../../constants'
 import styles from './Form.module.css'
 import { useDispatch } from 'react-redux'
-import { addMessage } from '../../store/messages/actions'
+import { addMessageWithReply } from '../../store/messages/actions'
 import { useParams } from 'react-router-dom'
 // import ITextField from '@mui/material/TextField'
 // import IButton from '@mui/material/Button'
@@ -14,7 +15,10 @@ export function Form() {
 
     const handleSubmit = (event) => {
         event.preventDefault() // отменяет перезагрузку странички
-        dispatch(addMessage(chatId, text))
+        dispatch(addMessageWithReply(chatId, {
+            author: AUTHOR.user,
+            text
+        }))
         setText('') // очистить инпут
     }
 

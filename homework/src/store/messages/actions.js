@@ -1,3 +1,4 @@
+import { AUTHOR } from '../../constants'
 export const ADD_CHAT = 'ADD_CHAT'
 export const DELETE_CHAT = 'DELETE_CHAT'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
@@ -14,3 +15,19 @@ export const addMessage = (chatName, text) => ({
     type: ADD_MESSAGE,
     payload: { chatName, text }
 })
+
+let timeout
+export const addMessageWithReply = (chatName, message) => (dispatch) => {
+    dispatch(addMessage(chatName, message))
+    if (timeout) {
+        clearTimeout(timeout)
+    }
+    if (message.author !== AUTHOR.bot) {
+        timeout = setTimeout(() => {
+            dispatch(addMessage(chatName, {
+                author: AUTHOR.bot,
+                text: 'Im bot'
+            }))
+        }, 1000)
+    }
+}

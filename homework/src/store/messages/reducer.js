@@ -31,8 +31,8 @@ export const messagesReducer = (state = initialState, action) => {
                 [payload.chatName]: [
                     ...state[payload.chatName], //вернуть все сообщения
                     {
-                        author: 'user',
-                        text: payload.text
+                        author: payload.text.author,
+                        text: payload.text.text
                     } // добавили новые сообщения
                 ]
             }
