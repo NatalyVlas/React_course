@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-// import { useState } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store'
 
@@ -9,22 +8,9 @@ import { MainPage } from './pages/MainPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ChatsPage } from './pages/ChatsPage'
 import { ChatList } from './components/ChatList/ChatList'
-
-// const defaultMessages = {
-//   default: [
-//     {
-//       author: 'user',
-//       text: 'one text'
-//     },
-//     {
-//       author: 'user',
-//       text: 'two text'
-//     }
-//   ]
-// }
+import { Articles } from './pages/Articles'
 
 export function App() {
-  // const [messages, setMessages] = useState(defaultMessages)
 
   return (
     <>
@@ -38,6 +24,7 @@ export function App() {
                 <Route index element={<ChatList />} />
                 <Route path=":chatId" element={<ChatsPage />} />
               </Route>
+              <Route path='articles' element={<Articles />} />
             </Route>
             <Route path='*' element={<h1>404 PAGE NOT FOUND</h1>} /> {/*при переходе не туда) */}
           </Routes>

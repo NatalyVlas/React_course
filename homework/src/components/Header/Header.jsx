@@ -17,6 +17,11 @@ export const navigate = [
         name: 'Chat',
         to: '/chats',
     },
+    {
+        id: 4,
+        name: 'Articles',
+        to: '/articles',
+    },
 ]
 
 export function Header() {
