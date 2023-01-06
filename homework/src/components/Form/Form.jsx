@@ -5,6 +5,8 @@ import styles from './Form.module.css'
 import { useDispatch } from 'react-redux'
 import { addMessageWithReply } from '../../store/messages/actions'
 import { useParams } from 'react-router-dom'
+import { push } from "firebase/database"
+import { getMessageListById } from "../../services/firebase"
 // import ITextField from '@mui/material/TextField'
 // import IButton from '@mui/material/Button'
 
@@ -19,6 +21,10 @@ export function Form() {
             author: AUTHOR.user,
             text
         }))
+        push(getMessageListById(chatId), {
+            author: AUTHOR.user,
+            text
+        })
         setText('') // очистить инпут
     }
 

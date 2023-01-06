@@ -1,7 +1,11 @@
 import { Outlet, NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
+import { Button } from '../UI/Button/Button'
+import { logOut } from '../../services/firebase'
 
-export const navigate = [
+export const navigates = [
     {
         id: 1,
         name: 'Main',
@@ -22,14 +26,39 @@ export const navigate = [
         name: 'Articles',
         to: '/articles',
     },
+    // {
+    //     id: 5,
+    //     name: 'SignIn',
+    //     to: '/signin',
+    // },
+    // {
+    //     id: 6,
+    //     name: 'SignUp',
+    //     to: '/signup',
+    // },
 ]
 
 export function Header() {
+
+    const navigate = useNavigate()
+    const name = useSelector((store) => store.profile.name)
+    const isAuth = useSelector((store) => store.profile.isAuth)
+
+    const handleLogin = () => {
+        navigate('/signin')
+    }
+    const handleSignUp = () => {
+        navigate('/signup')
+    }
+    const handleLogout = async () => {
+        await logOut()
+    }
+
     return (<>
         <header>
             <nav className={styles.nav}>
                 <ul>
-                    {navigate.map((link) => (
+                    {navigates.map((link) => (
                         <li key={link.id}>
                             <NavLink to={link.to}
                                 style={({ isActive }) => ({
@@ -39,10 +68,18 @@ export function Header() {
                                 {link.name}
                             </NavLink>
                         </li>
-                    )
-
-                    )}
+                    ))}
                 </ul>
+                {!isAuth && (
+                    <>
+                        <Button onClick={handleLogin}>login</Button>
+                        <Button onClick={handleSignUp}>sign in</Button>
+                    </>
+                )}
+                {isAuth && (
+                    <Button onClick={handleLogout}>logout</Button>
+                )}
+                <p>{name}</p>
             </nav>
         </header>
         <main>

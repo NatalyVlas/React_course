@@ -8,7 +8,7 @@ import styles from "./ChatsPage.module.css"
 import { useSelector } from 'react-redux'
 import { selectMessage } from '../store/messages/selectors'
 
-export function ChatsPage() {
+export function ChatsPage({ chats, messageDB }) {
     const { chatId } = useParams()
     const messages = useSelector(selectMessage)
 
@@ -28,6 +28,8 @@ export function ChatsPage() {
     //         }
     //     }
     // }, [chatId, messages])
+
+    // const messages = Object.entries(messageDB.find((chat) => chat.name === chatId).messageList)
 
     if (chatId && !messages[chatId]) {
         return <Navigate to="/chats" replace />
