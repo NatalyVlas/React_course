@@ -1,0 +1,12 @@
+.messages {
+    width: 250px;
+    margin: 40px;
+    font-family: source-code-pro;
+    color: #401A04;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.messages_li {
+    padding-top: 20px;
+}
