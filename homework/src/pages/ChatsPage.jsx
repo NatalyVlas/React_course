@@ -1,51 +1,33 @@
-import { Message } from '../components/Message/Message'
+import { useParams } from 'react-router-dom'
+import styles from "./ChatsPage.module.css"
+
 import { Form } from '../components/Form/Form'
 import { MessageList } from '../components/MessageList/MessageList'
 import { ChatList } from '../components/ChatList/ChatList'
-// import { useEffect } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
-import styles from "./ChatsPage.module.css"
-import { useSelector } from 'react-redux'
-import { selectMessage } from '../store/messages/selectors'
 
-export function ChatsPage({ chats, messageDB }) {
+export function ChatsPage({ messagesDB, chats }) {
     const { chatId } = useParams()
-    const messages = useSelector(selectMessage)
 
-    // useEffect(() => {
-    //     if (chatId &&
-    //         messages[chatId].length > 0 &&
-    //         messages[chatId][messages[chatId].length - 1].author === 'user') {
-    //         const timeout = setTimeout(() => {
-    //             onAddMessage(chatId, {
-    //                 author: 'bot',
-    //                 text: 'please, write something else'
-    //             })
-    //         }, 1500)
+    console.log(messagesDB)
 
-    //         return () => {
-    //             clearTimeout(timeout) // остановить бота
-    //         }
-    //     }
-    // }, [chatId, messages])
-
-    // const messages = Object.entries(messageDB.find((chat) => chat.name === chatId).messageList)
-
-    if (chatId && !messages[chatId]) {
-        return <Navigate to="/chats" replace />
-    }
+    const messagesChat = chats.find((chat) => chat?.name === chatId)
+    const messages = Object.entries(messagesChat.messages).map((mess) => ({
+        id: mess[0],
+        text: mess[1].text,
+        author: mess[1].author,
+    }))
 
     return (<>
-        <Message text="This is a Chat" />
-        <div className={styles.flex}>
-            <div>
-                <ChatList />
+        <div>
+            <div className={styles.flex}>
+                <div>
+                    <ChatList chats={chats} />
+                </div>
+                <div className={styles.margin} >
+                    < Form />
+                    <MessageList messages={chatId ? messages : []} />
+                </div>
             </div>
-            <div>
-                < Form />
-                <MessageList messages={chatId ? messages[chatId] : []} />
-            </div>
-
         </div>
     </>
     )

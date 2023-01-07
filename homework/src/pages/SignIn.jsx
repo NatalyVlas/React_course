@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import styles from './SignInOut.module.css'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import { auth } from "../store/profile/actions"
 import { Button } from "../components/UI/Button/Button"
 import { signIn } from '../services/firebase'
+import { Input } from "../components/UI/Input/Input"
 
 export function SignIn() {
     const [inputs, setInputs] = useState({ email: '', password: '' })
@@ -33,21 +35,24 @@ export function SignIn() {
     }
     return (
         <>
-            <form onSubmit={handleSubmit} style={{ margin: '15px', color: '#401A04' }}>
-                <p>Email:</p>
-                <input type="text"
-                    name="email"
-                    value={inputs.email}
-                    onChange={(event) => setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }))}
-                />
-                <p>Password:</p>
-                <input type="text"
-                    name="password"
-                    value={inputs.password}
-                    onChange={(event) => setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }))}
-                />
+            <form onSubmit={handleSubmit} style={{ margin: '20px', color: '#401A04' }}>
+                <label>Email:
+                    <br />
+                    <Input
+                        name="email"
+                        value={inputs.email}
+                        onChange={(event) => setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }))}
+                    /></label>
                 <br />
-                <Button style={{ marginTop: '15px' }}>login</Button>
+                <label>Password:
+                    <br />
+                    <Input
+                        name="password"
+                        value={inputs.password}
+                        onChange={(event) => setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }))}
+                    /></label>
+                <br />
+                <Button style={{ marginTop: '30px', marginLeft: '20px' }}>login</Button>
             </form>
             {loading && (
                 <Box sx={{ display: 'flex', justifyContent: "center" }}>

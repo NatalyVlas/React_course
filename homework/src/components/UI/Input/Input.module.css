@@ -1,12 +1,12 @@
-.btn {
+.input {
     border: 1px solid #3D7363;
     border-radius: 15px;
-    min-width: 100px;
-    color: #401A04;
+    color: #401a04;
     font-size: 1rem;
     font-weight: 800;
+    width: 250px;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 20px;
     display: inline-block;
     font-family: source-code-pro;
     background-color: #8C543F;

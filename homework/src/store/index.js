@@ -1,5 +1,5 @@
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux'
-import { profileReducer } from './profile/reduser'
+import { profileReducer } from './profile/reducer'
 import { messagesReducer } from './messages/reducer'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'

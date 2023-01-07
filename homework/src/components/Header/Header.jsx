@@ -26,16 +26,6 @@ export const navigates = [
         name: 'Articles',
         to: '/articles',
     },
-    // {
-    //     id: 5,
-    //     name: 'SignIn',
-    //     to: '/signin',
-    // },
-    // {
-    //     id: 6,
-    //     name: 'SignUp',
-    //     to: '/signup',
-    // },
 ]
 
 export function Header() {
@@ -54,38 +44,38 @@ export function Header() {
         await logOut()
     }
 
-    return (<>
-        <header>
-            <nav className={styles.nav}>
-                <ul>
-                    {navigates.map((link) => (
-                        <li key={link.id}>
-                            <NavLink to={link.to}
-                                style={({ isActive }) => ({
-                                    color: isActive ? '#b5290ad4' : '#D9AA8F'
-                                })}
-                            >
-                                {link.name}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
-                {!isAuth && (
-                    <>
-                        <Button onClick={handleLogin}>login</Button>
-                        <Button onClick={handleSignUp}>sign in</Button>
-                    </>
-                )}
-                {isAuth && (
-                    <Button onClick={handleLogout}>logout</Button>
-                )}
-                <p>{name}</p>
-            </nav>
-        </header>
-        <main>
-            <Outlet />  {/*  вставляет те компоненты(страницы), кот-е прописаны в конкретном роуте */}
-        </main>
-    </>
-
+    return (
+        <>
+            <header>
+                <nav className={styles.nav}>
+                    <ul>
+                        {navigates.map((link) => (
+                            <li key={link.id}>
+                                <NavLink to={link.to}
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#b5290ad4' : '#D9AA8F'
+                                    })}>{link.name}
+                                </NavLink>
+                            </li>
+                        ))}
+                        {!isAuth && (
+                            <>
+                                <Button onClick={handleLogin}>login</Button>
+                                <Button onClick={handleSignUp}>sign in</Button>
+                            </>
+                        )}
+                        {isAuth && (
+                            <>
+                                <Button onClick={handleLogout}>logout</Button>
+                                <p className={styles.name}>{name}'s chats</p>
+                            </>
+                        )}
+                    </ul>
+                </nav>
+            </header>
+            <main className={styles.content}>
+                <Outlet />  {/*  вставляет те компоненты(страницы), кот-е прописаны в конкретном роуте */}
+            </main>
+        </>
     )
 }

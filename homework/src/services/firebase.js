@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+    getAuth, createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, signOut
+} from 'firebase/auth'
 import { getDatabase, ref } from "firebase/database"
 
 const firebaseConfig = {
@@ -11,7 +14,7 @@ const firebaseConfig = {
     appId: "1:412641942367:web:728980d3341f3ff68bf4ea"
 }
 
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
 
 export const firebaseAuth = getAuth(app)
 
@@ -29,6 +32,7 @@ const db = getDatabase(app)
 export const userRef = ref(db, 'user') // доступ на БД на сайте
 export const messagesRef = ref(db, 'messages')
 
-export const getChatById = (chatId) => ref(db, `messageS/${chatId}`)
+export const getChatById = (chatId) => ref(db, `messages/${chatId}`)
 
-export const getMessageListById = (chatId) => ref(db, `messages/${chatId}/messageList`)
+export const getMessageListById = (chatId) => ref(db,
+    `messages/${chatId}/messageList`)

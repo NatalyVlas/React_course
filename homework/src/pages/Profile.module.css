@@ -1,0 +1,15 @@
+.profile {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.name {
+    color: #401A04;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: source-code-pro;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+}

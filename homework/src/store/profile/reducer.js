@@ -1,7 +1,7 @@
 import * as types from './types'
 
 const initialState = {
-    name: 'John',
+    name: 'Nataly',
     visible: true,
     isAuth: false
 }

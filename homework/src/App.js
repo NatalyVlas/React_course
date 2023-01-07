@@ -23,7 +23,7 @@ export function App() {
 
   const dispatch = useDispatch()
 
-  const [messageDB, setMessageDB] = useState({})
+  const [messagesDB, setMessagesDB] = useState({})
   const [chats, setChats] = useState([])
 
   useEffect(() => {
@@ -42,32 +42,30 @@ export function App() {
       const data = snapshot.val()
       const newChats = Object.entries(data).map((item) => ({
         name: item[0],
-        message: item[1].messageList
+        messages: item[1].messageList
       }))
 
-      setMessageDB(data)
+      setMessagesDB(data)
       setChats(newChats)
     })
   }, [])
 
   return (
     <>
-      {/* <Provider store={store}> */}
       <PersistGate persistor={persistor}>
         <Routes>
           <Route path='/' element={<Header />}>
             <Route index element={<MainPage />} />
             <Route path='profile' element={<ProfilePage />} />
-            {/* <Route path='chats'>
-                <Route index element={<ChatList />} />
-                <Route path=":chatId" element={<ChatsPage />} />
-              </Route> */}
             <Route path='chats' element={<PrivateRoute />}>
               <Route
                 index
-                element={<ChatList chats={chats} messageDB={messageDB} />}
+                element={<ChatList chats={chats} messagesDB={messagesDB} />}
               />
-              <Route path=':chatId' element={<ChatsPage chats={chats} messageDB={messageDB} />} />
+              <Route
+                path=":chatId"
+                element={<ChatsPage chats={chats} messagesDB={messagesDB} />}
+              />
             </Route>
             <Route path='articles' element={<Articles />} />
             <Route path='signin' element={<PublicRoute component={<SignIn />} />} />

@@ -2,6 +2,9 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { changeName, toggleProfile } from '../store/profile/actions'
 import { selectName, selectVisible } from "../store/profile/selectors"
+import styles from './Profile.module.css'
+import { Input } from "../components/UI/Input/Input"
+import { Button } from "../components/UI/Button/Button"
 
 export function ProfilePage() {
     // const name = useSelector((store) => store.name) // получаем данные из стор
@@ -13,25 +16,24 @@ export function ProfilePage() {
 
     return (
         <>
-            <p>Profile Page</p>
-            <h2>{name}</h2>
-            <input
-                type="checkbox"
-                checked={visible}
-                readOnly
-            />
-            <button onClick={() => dispatch(toggleProfile())}>Change visible</button>
-            <br />
-            <input
-                type="text"
-                value={value}
-                onChange={(event) => setValue(event.target.value)}
-            />
-            <button onClick={() => {
-                dispatch(changeName(value));
-                setValue('')
-            }}>Change name</button>
-            <br />
+            <h2 className={styles.name}>My name is {name}</h2>
+            <div className={styles.profile}>
+
+                <input
+                    type="checkbox"
+                    checked={visible}
+                    readOnly
+                />
+                <Button onClick={() => dispatch(toggleProfile())}>Change visible</Button>
+                <Input
+                    value={value}
+                    onChange={(event) => setValue(event.target.value)}
+                />
+                <Button onClick={() => {
+                    dispatch(changeName(value));
+                    setValue('')
+                }}>Change name</Button>
+            </div>
         </>
     )
 }

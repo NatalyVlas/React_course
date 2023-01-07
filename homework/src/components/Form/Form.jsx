@@ -7,8 +7,7 @@ import { addMessageWithReply } from '../../store/messages/actions'
 import { useParams } from 'react-router-dom'
 import { push } from "firebase/database"
 import { getMessageListById } from "../../services/firebase"
-// import ITextField from '@mui/material/TextField'
-// import IButton from '@mui/material/Button'
+import { Input } from '../UI/Input/Input'
 
 export function Form() {
     const [text, setText] = useState('')
@@ -31,26 +30,9 @@ export function Form() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {/* <ITextField
-                    type="text"
-                    value={value}
-                    onChange={(event) => setValue(event.target.value)}
-                    variant="outlined"
-                    placeholder="Enter your message"
-                    focused
-                    color="success"
-                    size="small"
-                />
-                <IButton
-                    variant="contained"
-                    type="submit"
-                    color="success"
-                    size="normal"
-                >Send a message</IButton> */}
-                <input type="text" value={text}
-                    onChange={(event) => setText(event.target.value)}
-                    className={styles.input}>
-                </input>
+                <Input value={text}
+                    onChange={(event) => setText(event.target.value)}>
+                </Input>
                 <Button type="submit">Send a message</Button>
             </form>
         </>
